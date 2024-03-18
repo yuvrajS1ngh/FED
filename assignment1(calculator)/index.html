@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CALCULATOR</title>
+</head>
+<body>
+    <script>    
+        document.body.style.cssText = "overflow: hidden; min-height: 100vh; display: flex; align-items: center; justify-content: center";
+
+        let btns = ["1" , "2" , "3" , "4" , "5" , "6" , "7" , "8" , "9" , "0" , "+" , "-" , "*" , "/" , "=" , "C"];
+
+
+        let gridHTML = document.createElement("div");
+        gridHTML.style.cssText = "box-shadow: 0px 0px 2px black; padding: 1rem; background: yellow; display: grid; grid-template-columns: 50px 50px 50px 50px; grid-template-rows: 50px 50px 50px 50px 50px; grid-gap: 10px;"
+        document.body.appendChild(gridHTML)
+
+
+        let display = document.createElement("div");
+        display.style.cssText = "background: white; box-sizing: border-box; padding: 1rem; grid-column: 1/span 4; overflow-x: auto; overflow-y: hidden; box-shadow: 0px 0px 2px black;";
+        gridHTML.appendChild(display);
+
+
+        
+        let input = "";
+        // calculator
+        btns.forEach(v => {  
+            let calcBtn = document.createElement("button");
+            calcBtn.style.cssText = "background: white; 10px; cursor: pointer; border: none; box-shadow: 0px 0px 2px black;";
+            calcBtn.innerText = v;
+            gridHTML.appendChild(calcBtn)
+            
+            calcBtn.addEventListener("click" , (e) => {
+                e.preventDefault();
+                try{
+                    if(e.target.innerHTML == "="){
+                        display.innerHTML = eval(input) || "0";
+                        input = display.innerHTML;
+                        if(input == "Infinity"){
+                            display.innerHTML = "error";
+                        }
+                    }
+                    else if(e.target.innerHTML == "C"){
+                        input = ""
+                        display.innerHTML = "";
+                    }
+                    else{
+                        input += e.target.innerHTML;
+                        display.innerHTML =  input;
+                    }
+                }
+                catch(e){
+                    display.innerHTML = "error";
+                    input = "";
+                }
+                
+            })
+        })
+
+        // for keyboards
+        document.body.addEventListener("keydown" , (e) => {
+                e.preventDefault();
+                try{
+                    if(e.key == "Enter"){
+                        display.innerHTML = eval(input) || "0";
+                        input = display.innerHTML;
+                        if(input == "Infinity"){
+                            display.innerHTML = "error";
+                        }
+                        
+                    }
+                    else if(e.key == "Backspace"){
+                        display.innerHTML = "";
+                        input = "";
+                    }
+                    else{
+                        if(btns.includes(e.key) && e.key != "=" && e.key != "C"){
+                            input += e.key;
+                            display.innerHTML = input;
+                        }
+                        
+                    }
+                }
+                catch(e){
+                    display.innerHTML = "error";
+                    input = "";
+                }
+                
+         })
+    </script>
+</body>
+</html>
