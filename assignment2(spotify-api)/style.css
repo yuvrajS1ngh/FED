@@ -1,0 +1,237 @@
+* {
+  padding: 0;
+  margin: 0;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  background-color: white;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 0px;
+}
+
+.nav-items{
+  display: flex;
+  align-items: center;
+}
+.nav-items div{
+  margin-left: 1rem;
+  cursor: pointer;
+}
+
+#log-in, #sign-up{
+  padding: 1rem;
+  background: black;
+  color: white;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+#log-in:hover, #sign-up:hover{
+  border: 1px solid black;
+  background: none;
+  color: black;
+}
+#sign-up{
+  background-color: #092b15;
+}
+
+header img {
+  /* filter: invert(); */
+  width: 170px;
+}
+
+.input {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+
+.search-container {
+  gap: 5px;
+}
+
+input,
+button {
+  background-color: white;
+  padding: 8px 19px;
+  border-radius: 10px;
+  box-shadow: 0 0 2px black;
+  outline: none;
+  border: none;
+}
+
+input {
+  width: 35vw;
+  font-weight: bolder;
+}
+
+button {
+  cursor: pointer;
+  font-weight: bolder;
+}
+
+#albums, #tracks {
+  margin-top: 10px;
+  /* max-width: 60vh; */
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  width: 50%;
+  max-height: 80vh;
+  overflow-y: scroll;
+
+}
+
+
+
+.album, .track {
+  width: 35vw;
+  cursor: pointer;
+  border-bottom: 2px solid white;
+  padding: 10px 5px;
+  margin-top: 5px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.album:hover, .track:hover {
+  opacity: 0.7;
+}
+
+main{
+  display: flex;
+  justify-content: space-around;
+  gap: 25px;
+  min-height: 80vh;
+}
+
+
+#audioPlayer {
+  width: 50vw;
+
+  
+}
+
+#audioPlayer::-webkit-media-controls-play-button {
+  margin: 10px;
+  cursor: pointer;
+  color: white;
+}
+
+.playbar {
+  padding: 1rem;
+  display: flex;
+  justify-content: space-around;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  background-color: #092b15;
+  color: white;
+  height: 50px;
+  border-top: 2px solid white;
+
+}
+
+.song {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  overflow: hidden;
+}
+
+.songinfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  /* align-items: center; */
+}
+
+.songimage {
+  width: 40px;
+}
+
+.control{
+  position: relative;
+  right: 50px;
+}
+
+
+@media only screen and (max-width: 500px) {
+  main{
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+  }
+
+  #albums , #tracks{
+    width: 100%;
+  }
+  .playbar {
+    flex-direction: column;
+    height: 115px;
+    gap: 5px;
+    align-items: center;
+    text-align: left;
+  }
+
+  .song {
+    padding-top: 5px;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 95vw;
+  }
+
+  .control{
+    position: relative;
+    right: 15px;
+  }
+
+  .navbar{
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+  }
+  .nav-items{
+    display: flex;
+    justify-content: center;
+  }
+  #audioPlayer {
+    width: 95vw;
+  }
+}
+
+@media only screen and (max-width: 426px) {
+  .input {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  input {
+    width: 80vw;
+    text-align: center;
+  }
+
+  .album, .track {
+    width: 80vw;
+  }
+}

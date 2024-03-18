@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Calculator</title>
+</head>
+<body>
+  <script>
+    document.head.innerHTML += `
+      <style>
+        * 
+        {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+
+        body 
+        {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          min-height: 100vh;
+          background: #282c2f;
+        }
+
+        .Calculator 
+        {
+          width: 340px;
+          padding: 20px;
+          border-radius: 20px;
+          box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .Buttons 
+        {
+          display: grid;
+          grid-gap: 10px;
+          grid-template-columns: repeat(4, 1fr);
+        }
+
+        #Value 
+        {
+          grid-column: span 4;
+          user-select: none;
+          text-align: end;
+          color: whitesmoke;
+          height: 100px;
+          line-height: 100px;
+          border: 2px solid transparent;
+          border-radius: 10px;
+          padding: 0 20px;
+          font-size: 2em;
+          background: #33393e;
+          margin-bottom: 12px;
+        }
+
+        .Buttons span 
+        {
+          padding: 10px;
+          cursor: pointer;
+          min-width: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.2em;
+          color: whitesmoke;
+          background: #33393e;
+          border: 2px solid transparent;
+          border-radius: 10px;
+        }
+      </style>
+    `;
+
+    var calculatorDiv = document.createElement("div");
+    calculatorDiv.className = "Calculator";
+
+    var buttonsDiv = document.createElement("div");
+    buttonsDiv.className = "Buttons";
+
+    var displayValue = document.createElement("h2");
+    displayValue.id = "Value";
+
+    var buttons = ["Clear", "=", ".", "+", "7", "8", "9", "-", "4", "5", "6", "/", "1", "2", "3", "*", "0", "00"];
+
+    buttons.forEach(function(buttonText) 
+    {
+      var button = document.createElement("span");
+      button.textContent = buttonText;
+      buttonsDiv.appendChild(button);
+    });
+
+    calculatorDiv.appendChild(displayValue);
+    calculatorDiv.appendChild(buttonsDiv);
+    document.body.appendChild(calculatorDiv);
+
+    buttonsDiv.addEventListener("click", function(event) 
+    {
+      if (event.target.tagName === "SPAN") 
+      {
+        var buttonValue = event.target.textContent;
+        var currentValue = displayValue.textContent;
+
+        if (buttonValue === "=") 
+        {
+          displayValue.textContent = calculate(currentValue);
+        } 
+        else if (buttonValue === "Clear") 
+        {
+          displayValue.textContent = "";
+        } 
+        else 
+        {
+          if (currentValue === "0") {
+            displayValue.textContent = "";
+          }
+          displayValue.textContent += buttonValue;
+        }
+      }
+    });
+
+    document.addEventListener("keydown", function(event) 
+    {
+      var keyPressed = event.key;
+      var buttons = document.querySelectorAll(".Buttons span");
+      
+      buttons.forEach(function(button) 
+      {
+        if (button.textContent === keyPressed) 
+        {
+          button.click();
+        }
+      });
+
+      if (event.key === "Enter" && event.target.tagName !== "INPUT")
+      {
+        var equalsButton = document.querySelector('.Buttons span:nth-child(2)');
+        equalsButton.click();
+      } 
+      else if (event.key === "Backspace") 
+      {
+        var clearButton = document.querySelector('.Buttons span:nth-child(1)');
+        clearButton.click();
+      }
+    });
+
+    function calculate(expression) 
+    {
+      var operator = "";
+      var num1 = "";
+      var num2 = "";
+
+      for (var i = 0; i < expression.length; i++) 
+      {
+        if (expression[i] === "+" || expression[i] === "-" || expression[i] === "*" || expression[i] === "/") {
+          operator = expression[i];
+          num1 = parseFloat(expression.slice(0, i));
+          num2 = parseFloat(expression.slice(i + 1));
+          break;
+        }
+      }
+
+      switch (operator) {
+        case "+":
+          return num1 + num2;
+        case "-":
+          return num1 - num2;
+        case "*":
+          return num1 * num2;
+        case "/":
+          if (num2 !== 0) 
+          {
+            return num1 / num2;
+          } 
+          else 
+          {
+            return "Err: Div by 0";
+          }
+        default:
+          return "Err: Not valid exp";
+      }
+    }
+  </script>
+</body>
+</html>

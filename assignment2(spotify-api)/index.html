@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify-Music Player</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+    <nav class="navbar">
+        <img src="./assets/logo.svg" alt="spotify" width="100" height="100">
+        <div class="nav-items">
+            <div id="home">Home</div>
+            <div id="log-in">Log in</div>
+            <div id="sign-up">Sign up</div>
+        </div>
+    </nav>
+
+    <div class="serach-container">
+        <div class="input">
+            <input type="text" id="searchInput" placeholder="Search artist">
+            <button id="searchButton">Search</button>
+        </div>
+        
+    </div>
+
+
+    <main>
+        <div id="albums"></div>
+        <div id="tracks">
+            <div class="track"></div>
+        </div>
+    </main>
+
+    <div class="playbar">
+
+        <div class="song">
+            <img src="./assets/favicon.ico" alt="" class="songimage">
+            <div class="songinfo">
+                <div class="songname">Song Name</div>
+                <div class="songartist">Singer Name</div>
+            </div>
+        </div>
+        <div class="control">
+            <audio id="audioPlayer" controls></audio>
+        </div>
+    </div>
+    <script src="./script.js"></script>
+</body>
+
+</html>
